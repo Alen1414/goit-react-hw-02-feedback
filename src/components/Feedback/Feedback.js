@@ -65,7 +65,7 @@ render() {
         neutral={this.state.neutral}
         bad={this.state.bad}
         total={total}
-        positive={positiv}
+        positiv={positiv}
             />
 
             )}
