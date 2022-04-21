@@ -80,4 +80,3 @@ render() {
 export default Feedback;
 
 
-console.log(Feedback)
