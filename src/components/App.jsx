@@ -5,26 +5,34 @@ import Section from 'components/Feedback/Section';
 import Statistics from 'components/Feedback/Statistics';
 import Notification from 'components/Feedback/Notoficaion';
 
+import FeedbackOptions from 'components/Feedback/FeedbackOptions';
 class Feedback extends React.Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
-  hendelGood = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-  };
-  hendelNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-  hendelBad = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
+  // hendelGood = () => {
+  //   this.setState(prevState => ({
+  //     good: prevState.good + 1,
+  //   }));
+  // };
+  // hendelNeutral = () => {
+  //   this.setState(prevState => ({
+  //     neutral: prevState.neutral + 1,
+  //   }));
+  // };
+  // hendelBad = () => {
+  //   this.setState(prevState => ({
+  //     bad: prevState.bad + 1,
+  //   }));
+  // };
+  handleClickButton = e => {
+    const option = e.target.name;
+
+    if (option) {
+      this.setState(prevState => ({ [option]: prevState[option] + 1 }));
+    }
   };
   totalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
@@ -35,21 +43,25 @@ class Feedback extends React.Component {
   render() {
     const total = this.totalFeedback();
     const positiv = this.totalPositivFeedback();
+    const options = Object.keys(this.state);
 
     return (
       <div className="Feedback">
-        <h1> Please leave feedback!</h1>
-
-        <button type="button" onClick={this.hendelGood}>
+        <Section title="Please leave feedback!">
+          <FeedbackOptions
+            options={options}
+            onLeaveFeedback={this.handleClickButton}
+          />
+        </Section>
+        {/* <button type="button" onClick={this.hendelGood}>
           Good
         </button>
         <button type="button" onClick={this.hendelNeutral}>
           Neutral
         </button>
-
         <button type="button" onClick={this.hendelBad}>
           Bad
-        </button>
+        </button> */}
 
         <Section title="Statistics">
           {total < 1 ? (
